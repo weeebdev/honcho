@@ -33,6 +33,16 @@ services:
       - CACHE_URL=redis://redis:6379/0
       - LLM_OPENAI_API_KEY=${LLM_OPENAI_API_KEY}
       - LLM_OPENAI_BASE_URL=${LLM_OPENAI_BASE_URL}
+      # Model — all components use the same LiteLLM-routed model
+      - DERIVER_MODEL_CONFIG__MODEL=${MODEL:-qwen3.7-max}
+      - DIALECTIC_LEVELS__minimal__MODEL_CONFIG__MODEL=${MODEL:-qwen3.7-max}
+      - DIALECTIC_LEVELS__low__MODEL_CONFIG__MODEL=${MODEL:-qwen3.7-max}
+      - DIALECTIC_LEVELS__medium__MODEL_CONFIG__MODEL=${MODEL:-qwen3.7-max}
+      - DIALECTIC_LEVELS__high__MODEL_CONFIG__MODEL=${MODEL:-qwen3.7-max}
+      - DIALECTIC_LEVELS__max__MODEL_CONFIG__MODEL=${MODEL:-qwen3.7-max}
+      - SUMMARY_MODEL_CONFIG__MODEL=${MODEL:-qwen3.7-max}
+      - DREAM_DEDUCTION_MODEL_CONFIG__MODEL=${MODEL:-qwen3.7-max}
+      - DREAM_INDUCTION_MODEL_CONFIG__MODEL=${MODEL:-qwen3.7-max}
     networks:
       - default
       - ai-mesh
@@ -55,6 +65,7 @@ services:
       - CACHE_URL=redis://redis:6379/0
       - LLM_OPENAI_API_KEY=${LLM_OPENAI_API_KEY}
       - LLM_OPENAI_BASE_URL=${LLM_OPENAI_BASE_URL}
+      - DERIVER_MODEL_CONFIG__MODEL=${MODEL:-qwen3.7-max}
     restart: unless-stopped
 
   database:
