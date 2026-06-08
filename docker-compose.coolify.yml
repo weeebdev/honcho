@@ -33,7 +33,11 @@ services:
       - CACHE_URL=redis://redis:6379/0
       - LLM_OPENAI_API_KEY=${LLM_OPENAI_API_KEY}
       - LLM_OPENAI_BASE_URL=${LLM_OPENAI_BASE_URL}
+      # Embeddings — routed through LiteLLM (configure gemini/gemini-embedding-2 there)
+      - EMBEDDING_MODEL_CONFIG__TRANSPORT=openai
+      - EMBEDDING_MODEL_CONFIG__MODEL=gemini-embedding-2
       - EMBEDDING_MODEL_CONFIG__OVERRIDES__BASE_URL=${LLM_OPENAI_BASE_URL}
+      - EMBEDDING_VECTOR_DIMENSIONS=3072
       # Model — all components use the same LiteLLM-routed model
       - DERIVER_MODEL_CONFIG__MODEL=${MODEL:-qwen3.7-max}
       - DIALECTIC_LEVELS__minimal__MODEL_CONFIG__MODEL=${MODEL:-qwen3.7-max}
@@ -66,7 +70,10 @@ services:
       - CACHE_URL=redis://redis:6379/0
       - LLM_OPENAI_API_KEY=${LLM_OPENAI_API_KEY}
       - LLM_OPENAI_BASE_URL=${LLM_OPENAI_BASE_URL}
+      - EMBEDDING_MODEL_CONFIG__TRANSPORT=openai
+      - EMBEDDING_MODEL_CONFIG__MODEL=gemini-embedding-2
       - EMBEDDING_MODEL_CONFIG__OVERRIDES__BASE_URL=${LLM_OPENAI_BASE_URL}
+      - EMBEDDING_VECTOR_DIMENSIONS=3072
       - DERIVER_MODEL_CONFIG__MODEL=${MODEL:-qwen3.7-max}
     restart: unless-stopped
 
