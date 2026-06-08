@@ -54,7 +54,7 @@ services:
       dockerfile: Dockerfile
     entrypoint: ["/app/.venv/bin/python", "-m", "src.deriver"]
     depends_on:
-      api:
+      honcho:
         condition: service_healthy
       database:
         condition: service_healthy
